@@ -1,0 +1,300 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+
+
+
+<h:head>
+
+
+
+
+</h:head>
+
+
+
+<h:body>
+
+
+	<h:form>
+
+		<p:breadCrumb>
+
+			<p:menuitem />
+
+			<p:menuitem value="Página JSF" action="index.jsf" />
+
+			<p:menuitem value="Página PrimeFaces" action="primefaces.jsf" />
+		</p:breadCrumb>
+
+	</h:form>
+	<h:form>
+		<h:messages showDetail="true" showSummary="false" id="msg" />
+		<h:panelGrid columns="2">
+			<h:outputLabel>Id:</h:outputLabel>
+			<h:inputText readonly="true"
+				value="#{usuarioPessoaManagedBean.usuarioPessoa.id}" />
+
+			<h:outputLabel>Nome:</h:outputLabel>
+			<h:inputText value="#{usuarioPessoaManagedBean.usuarioPessoa.nome}"
+				required="true" requiredMessage="Informe o nome do Usuário" />
+
+			<h:outputLabel>Sobrenome:</h:outputLabel>
+			<h:inputText
+				value="#{usuarioPessoaManagedBean.usuarioPessoa.sobrenome}"
+				required="true" requiredMessage="Informe o Sobrenome" />
+
+
+
+			<h:outputLabel>Idade:</h:outputLabel>
+			<h:inputText value="#{usuarioPessoaManagedBean.usuarioPessoa.idade}"
+				required="true" requiredMessage="Informe a idade do Usuario" />
+
+			<h:outputLabel>Salário:</h:outputLabel>
+			<h:inputText
+				value="#{usuarioPessoaManagedBean.usuarioPessoa.salario}"
+				required="true" requiredMessage="Informe o Salário do Usuario" />
+
+
+
+			<h:outputLabel>Sexo:</h:outputLabel>
+			<h:selectOneMenu
+				value="#{usuarioPessoaManagedBean.usuarioPessoa.sexo}"
+				required="true" requiredMessage="Informe o Sexo">
+
+				<f:selectItem itemValue="MASCULINO" />
+				<f:selectItem itemValue="FEMININO" />
+
+
+			</h:selectOneMenu>
+
+
+
+			<h:outputLabel>Cep:</h:outputLabel>
+			<h:inputText value="#{usuarioPessoaManagedBean.usuarioPessoa.cep}"
+				id="cepuser" required="true" requiredMessage="Informe o Cep">
+				<f:ajax event="blur" execute="@this"
+					render="logradouro complemento bairro localidade uf ibge gia"
+					listener="#{usuarioPessoaManagedBean.pesquisaCep}" />
+
+			</h:inputText>
+
+			<h:outputLabel>Logradouro:</h:outputLabel>
+			<h:inputText
+				value="#{usuarioPessoaManagedBean.usuarioPessoa.logradouro}"
+				id="logradouro" required="true"
+				requiredMessage="Informe o Logradouro">
+
+			</h:inputText>
+
+			<h:outputLabel>Complemento:</h:outputLabel>
+			<h:inputText
+				value="#{usuarioPessoaManagedBean.usuarioPessoa.complemento}"
+				id="complemento">
+			</h:inputText>
+
+			<h:outputLabel>Bairro:</h:outputLabel>
+			<h:inputText value="#{usuarioPessoaManagedBean.usuarioPessoa.bairro}"
+				id="bairro">
+			</h:inputText>
+
+
+			<h:outputLabel>Localidade:</h:outputLabel>
+			<h:inputText
+				value="#{usuarioPessoaManagedBean.usuarioPessoa.localidade}"
+				id="localidade">
+			</h:inputText>
+
+			<h:outputLabel>Uf:</h:outputLabel>
+			<h:inputText value="#{usuarioPessoaManagedBean.usuarioPessoa.uf}"
+				id="uf">
+			</h:inputText>
+
+
+			<h:outputLabel>Ibge:</h:outputLabel>
+			<h:inputText value="#{usuarioPessoaManagedBean.usuarioPessoa.ibge}"
+				id="ibge">
+			</h:inputText>
+
+			<h:outputLabel>Gia:</h:outputLabel>
+			<h:inputText value="#{usuarioPessoaManagedBean.usuarioPessoa.gia}"
+				id="gia">
+			</h:inputText>
+
+
+
+			<h:outputLabel>Login:</h:outputLabel>
+
+
+
+			<h:inputText value="#{usuarioPessoaManagedBean.usuarioPessoa.login}"
+				required="true" requiredMessage="Informe o Login do Usuario" />
+
+			<h:outputLabel>Senha:</h:outputLabel>
+			<h:inputSecret
+				value="#{usuarioPessoaManagedBean.usuarioPessoa.senha}"
+				required="true" requiredMessage="Informe a Senha do Usuario" />
+
+		</h:panelGrid>
+		<br />
+		<br />
+
+		<h:commandButton value="Salvar"
+			action="#{usuarioPessoaManagedBean.salvar}">
+
+		</h:commandButton>
+
+		<h:commandButton value="Novo" immediate="true"
+			action="#{usuarioPessoaManagedBean.novo}">
+			<f:ajax execute="@this" render="@form" />
+		</h:commandButton>
+
+		<br />
+		<br />
+
+	</h:form>
+	<h:form id="cadastro">
+
+		<h:dataTable value="#{usuarioPessoaManagedBean.list}" var="user"
+			cellpadding="15" border="1">
+
+			<f:facet name="header">Lista de Usuários</f:facet>
+
+			<h:column>
+				<f:facet name="header">ID</f:facet>
+				<center>
+					<h:outputText value="#{user.id}"></h:outputText>
+
+				</center>
+			</h:column>
+
+			<h:column>
+				<f:facet name="header">NOME</f:facet>
+				<h:outputText value="#{user.nome}"></h:outputText>
+
+
+			</h:column>
+
+
+			<h:column>
+				<f:facet name="header">SOBRENOME</f:facet>
+				<h:outputText value="#{user.sobrenome}"></h:outputText>
+
+
+			</h:column>
+
+
+
+
+			<h:column>
+				<f:facet name="header">IDADE</f:facet>
+				<center>
+					<h:outputText value="#{user.idade}"></h:outputText>
+
+				</center>
+			</h:column>
+
+
+
+			<h:column>
+
+				<f:facet name="header">SEXO</f:facet>
+				<h:outputText value="#{user.sexo}"></h:outputText>
+
+			</h:column>
+
+
+
+			<h:column>
+				<f:facet name="header">LOGIN</f:facet>
+				<h:outputText value="#{user.login}"></h:outputText>
+
+
+			</h:column>
+
+
+			<h:column>
+				<f:facet name="header">EDITAR</f:facet>
+				<center>
+					<h:commandLink immediate="true" id="botaoeditar">
+
+						<h:graphicImage url="resources/img/editar.jpg" width="25"
+							height="25" />
+
+						<f:setPropertyActionListener value="#{user}"
+							target="#{usuarioPessoaManagedBean.usuarioPessoa}" />
+
+
+
+					</h:commandLink>
+				</center>
+
+			</h:column>
+
+
+			<h:column>
+				<f:facet name="header">EXCLUIR</f:facet>
+				<center>
+					<h:commandLink immediate="true"
+						action="#{usuarioPessoaManagedBean.remover}">
+
+						<h:graphicImage url="resources/img/excluir.png" width="25"
+							height="25" />
+
+						<f:setPropertyActionListener value="#{user}"
+							target="#{usuarioPessoaManagedBean.usuarioPessoa}" />
+					</h:commandLink>
+
+				</center>
+			</h:column>
+
+			<h:column>
+				<f:facet name="header">TELEFONE</f:facet>
+				<center>
+					<h:commandLink immediate="true" action="telefone.jsf"
+						id="botaofone">
+
+						<h:graphicImage url="resources/img/telefone.png" width="25"
+							height="25" />
+
+						<f:param name="codigouser" value="#{user.id}" />
+
+
+
+					</h:commandLink>
+
+				</center>
+			</h:column>
+
+
+
+
+		</h:dataTable>
+
+
+
+
+
+	</h:form>
+
+
+
+
+
+
+
+</h:body>
+
+
+
+
+
+
+
+
+
+</html>

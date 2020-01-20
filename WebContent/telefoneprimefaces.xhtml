@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+
+
+<h:head>
+
+
+
+
+</h:head>
+
+
+
+<h:body>
+
+	<h:form>
+
+		<p:breadCrumb>
+
+			<p:menuitem />
+
+			<p:menuitem value="Página JSF" action="index.jsf" />
+
+			<p:menuitem value="Página PrimeFaces" action="primefaces.jsf" />
+		</p:breadCrumb>
+
+	</h:form>
+	<h:form id="formulario">
+
+		<p:messages showDetail="true" showSummary="false" id="msg" />
+
+
+		<h:panelGrid columns="2">
+
+
+			<p:outputLabel>Usuario: </p:outputLabel>
+			<p:outputLabel value="#{telfoneManagedBean.user.nome}" />
+
+
+
+			<p:outputLabel>Número:</p:outputLabel>
+			<p:inputText value="#{telfoneManagedBean.telefone.numero}"
+				required="true" requiredMessage="Informe o Número" />
+
+			<p:outputLabel>Tipo:</p:outputLabel>
+			<p:inputText value="#{telfoneManagedBean.telefone.tipo}"
+				required="true" requiredMessage="Informe o Tipo" />
+
+		</h:panelGrid>
+		<br />
+		<br />
+
+
+		<p:commandButton value="Salvar" action="#{telfoneManagedBean.salvar}"
+			ajax="false" />
+
+	</h:form>
+
+	<h:form id="formTelefones">
+
+		<p:dataTable value="#{telfoneManagedBean.user.telefoneUsers}"
+			var="fone" cellpadding="15" border="1" id="tabelFone">
+
+
+			<f:facet name="header">Lista de Telefones</f:facet>
+
+			<p:column style="width:50px;">
+				<f:facet name="header" width="50">ID</f:facet>
+				<h:outputText value="#{fone.id}" />
+			</p:column>
+
+
+			<p:column style="width:50px;">
+				<f:facet name="header">Número</f:facet>
+				<h:outputText value="#{fone.numero}" />
+			</p:column>
+
+
+			<p:column style="width:50px;">
+				<f:facet name="header">Tipo:</f:facet>
+				<h:outputText value="#{fone.tipo}" />
+			</p:column>
+
+
+			<p:column style="width:50px;">
+				<f:facet name="header">EXCLUIR</f:facet>
+				<center>
+					<p:commandLink immediate="true"
+						action="#{telfoneManagedBean.removeTelefone}" id="botaoremover">
+
+						<p:graphicImage url="resources/img/excluir.png" width="25"
+							height="25" />
+
+						<f:setPropertyActionListener value="#{fone}"
+							target="#{telfoneManagedBean.telefone}" />
+						<f:ajax execute="botaoremover" render="@form" />
+					</p:commandLink>
+				</center>
+
+			</p:column>
+
+
+		</p:dataTable>
+
+
+
+
+
+	</h:form>
+
+
+
+
+
+
+</h:body>
+
+
+
+
+
+
+
+
+
+</html>
